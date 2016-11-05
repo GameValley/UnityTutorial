@@ -11,11 +11,11 @@ function Start () {
 
   var pos = Vector3(floor.position.x - Mathf.Floor(columns/2)*ball.localScale.x, 
                     floor.position.y + floor.localScale.y / 2 + ball.localScale.y / 2);
-  var instance : Transform;
+
   for (var i=0; i<columns; i++) {
     for (var j=0; j<rows; j++) {
       var ballPos = Vector3(pos.x + i*ball.localScale.x, pos.y + j*ball.localScale.y);
-  	  instance = Instantiate(ball, ballPos, Quaternion.identity);
+  	  var instance = Instantiate(ball, ballPos, Quaternion.identity);
   	  instance.gameObject.GetComponent.<Renderer>().material.color = colors[Random.Range(0, colors.length)];
   	}
   }
@@ -27,6 +27,7 @@ function Update () {
     var hit: RaycastHit;
     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+    // Destroy the ball being clicked
     if (Physics.Raycast(ray, hit)) {
       Destroy(hit.transform.gameObject);
     }
